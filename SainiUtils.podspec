@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'SainiUtils'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of SainiUtils.'
+  s.summary          = 'SainiUtils is used to extend the basic functionality of UIKit elements like UIView,UIButton,UITextfield etc'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
 
   s.description      = <<-DESC
 TODO: Add long description of the pod here.
+  'SainiUtils basic purpose to reduce your development time by extened the basic functionality of UIKit elements'
                        DESC
 
   s.homepage         = 'https://github.com/rohitsaini91/SainiUtils'
@@ -26,11 +27,10 @@ TODO: Add long description of the pod here.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'rohitsaini91' => 'sketchlearn7@gmail.com' }
   s.source           = { :git => 'https://github.com/rohitsaini91/SainiUtils.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://www.linkedin.com/in/rohit-saini-aba50362/'
 
-  s.ios.deployment_target = '8.0'
-
-  s.source_files = 'SainiUtils/Classes/**/*'
+  s.ios.deployment_target = '10.0'
+  s.source_files = 'Source/**/*.swift'
   
   # s.resource_bundles = {
   #   'SainiUtils' => ['SainiUtils/Assets/*.png']
