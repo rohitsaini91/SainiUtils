@@ -1,0 +1,6 @@
+use_frameworks!
+target 'SainiUtils_Tests' do
+  pod 'SainiUtils', :path => '../'
+  
+  
+end
