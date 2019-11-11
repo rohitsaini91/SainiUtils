@@ -5,11 +5,14 @@
 [![License](https://img.shields.io/cocoapods/l/SainiUtils.svg?style=flat)](https://cocoapods.org/pods/SainiUtils)
 [![Platform](https://img.shields.io/cocoapods/p/SainiUtils.svg?style=flat)](https://cocoapods.org/pods/SainiUtils)
 
-## Example
+## Introduction
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+SainiUtils is used to extend the basic functionality of UIKit elements like UIView,UIButton,UITextfield etc.
 
-## Requirements
+## Purpose
+
+SainiUtils basic purpose to reduce your development time by extened the basic functionality of UIKit elements.
+
 
 ## Installation
 
