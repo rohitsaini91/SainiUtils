@@ -126,7 +126,7 @@ demoLbl.textColor = sainiColorFromHex(hex: "#687f9")
 
 # Author
 
-rohitsaini91, sketchlearn7@gmail.com
+rohitsaini91, rohitsainier@gmail.com
 
 # License
 
