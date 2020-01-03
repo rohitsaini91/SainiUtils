@@ -48,7 +48,7 @@ pod 'SainiUtils'
 | 19.)sainiFadeInInfinite | 
 | 20.)sainiShowLoader | 
 | 21.)sainiRemoveLoader | 
-| 22.)0sainiRotateByAngle | 
+| 22.)sainiRotateByAngle | 
 | 23.)sainiDashedLine | 
 | 24.)sainiAddTapGesture | 
 | 25.)sainiPulsate | 
