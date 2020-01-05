@@ -23,6 +23,20 @@ it, simply add the following line to your Podfile:
 pod 'SainiUtils'
 ```
 
+# How to Use
+```swift
+let demoView = UIView()
+demoView.sainiFeatureName()//Just use the below given function names.
+
+//example
+let demoLabel = UILabel()
+demoLabel.sainiAddTapGesture{
+print("I can now click on UILabel")
+demoLabel.sainiRotate()//Oh cool its rotating 
+}
+
+```
+
 # Features
 
 | UIView        | 
@@ -87,6 +101,8 @@ pod 'SainiUtils'
 | 49.)sainiPercentageOfDay |
 | 50.)sainiNumberOfWeeksInMonth |
 | 51.)sainiFormattedDateString |
+
+
 
 # Some handy Functions
 ## sainiColorFromHex
