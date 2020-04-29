@@ -464,3 +464,30 @@ public func getDifferenceFromCurrentTime(_ timeStemp : Double) -> Int
     return Int(interval)
 }
 
+
+//MARK:- SainiShadowButton
+final class SainiShadowButton: UIButton {
+    
+    private var shadowLayer: CAShapeLayer!
+    @IBInspectable var cornerRadius : CGFloat = 0
+    @IBInspectable var shadowRadius : CGFloat = 0
+    @IBInspectable var shadowColor : UIColor? = UIColor.black
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if shadowLayer == nil {
+            shadowLayer = CAShapeLayer()
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+            shadowLayer.fillColor = #colorLiteral(red: 0.3761442602, green: 0.9105725884, blue: 0.4707484245, alpha: 1)
+            shadowLayer.shadowColor = shadowColor?.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 0, height: 0)
+            shadowLayer.shadowOpacity = 1
+            shadowLayer.shadowRadius = shadowRadius
+            
+            layer.insertSublayer(shadowLayer, at: 0)
+        }
+    }
+    
+}
