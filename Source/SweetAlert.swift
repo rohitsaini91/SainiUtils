@@ -67,9 +67,9 @@ open class SweetAlert: UIViewController {
         titleLabel.text = ""
         titleLabel.numberOfLines = 1
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: kFont, size:25)
+        titleLabel.font = UIFont(name: kFont, size:16)
         titleLabel.textColor = UIColor.colorFromRGB(0x575757)
-        titleLabel.backgroundColor = WhiteColor
+        titleLabel.backgroundColor = .white
     }
     
     fileprivate func setupSubtitleTextView() {
@@ -78,7 +78,7 @@ open class SweetAlert: UIViewController {
         subTitleTextView.font = UIFont(name: kFont, size:16)
         subTitleTextView.textColor = UIColor.colorFromRGB(0x797979)
         subTitleTextView.isEditable = false
-        subTitleTextView.backgroundColor = WhiteColor
+        subTitleTextView.backgroundColor = .white
     }
     
     fileprivate func resizeAndRelayout() {
@@ -219,7 +219,7 @@ open class SweetAlert: UIViewController {
     }
 
     open func showAlert(_ title: String, subTitle: String?, style: AlertStyle,buttonTitle: String, action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
-        _ = showAlert(getTranslate(title), subTitle: getTranslate(subTitle!), style: style, buttonTitle: getTranslate(buttonTitle),buttonColor: BlueColor)
+        _ = showAlert((title), subTitle: (subTitle!), style: style, buttonTitle: (buttonTitle),buttonColor: .blue)
         userAction = action
         return self
     }
@@ -268,14 +268,14 @@ open class SweetAlert: UIViewController {
                 self.animatedView = nil
             }
 
-            self.titleLabel.text = getTranslate(title)
+            self.titleLabel.text = (title)
             if subTitle != nil {
-                self.subTitleTextView.text = getTranslate(subTitle!)
+                self.subTitleTextView.text = (subTitle!)
             }
             buttons = []
             if buttonTitle.isEmpty == false {
                 let button: UIButton = UIButton(type: UIButton.ButtonType.custom)
-                button.setTitle(getTranslate(buttonTitle), for: UIControl.State())
+                button.setTitle((buttonTitle), for: UIControl.State())
                 button.backgroundColor = buttonColor
                 button.isUserInteractionEnabled = true
                 button.tag = 0
@@ -284,7 +284,7 @@ open class SweetAlert: UIViewController {
             
             if otherButtonTitle != nil && otherButtonTitle!.isEmpty == false {
                 let button: UIButton = UIButton(type: UIButton.ButtonType.custom)
-                button.setTitle(getTranslate(otherButtonTitle!), for: UIControl.State())
+                button.setTitle((otherButtonTitle!), for: UIControl.State())
                 button.backgroundColor = otherButtonColor
                 button.addTarget(self, action: #selector(SweetAlert.pressed(_:)), for: UIControl.Event.touchUpInside)
                 button.tag = 1
@@ -343,7 +343,7 @@ open class SweetAlert: UIViewController {
 
 class AnimatableView: UIView {
     func animate(){
-        printData("Should overide by subclasss", terminator: "")
+        log.warning("Should overide by subclasss")/
     }
 }
 
@@ -418,7 +418,7 @@ class CancelAnimatedView: AnimatableView {
         
         var t2 = CATransform3DIdentity;
         t2.m34 = 1.0 / -500.0;
-        t2 = CATransform3DRotate(t2, CGFloat(-M_PI), 1, 0, 0);
+        t2 = CATransform3DRotate(t2, CGFloat(-Double.pi), 1, 0, 0);
 
         let animation = CABasicAnimation(keyPath: "transform")
         let time = 0.3
