@@ -147,3 +147,6 @@ rohitsaini91, rohitsainier@gmail.com
 # License
 
 SainiUtils is available under the MIT license. See the LICENSE file for more info.
+
+# Update from SainiUtils Date: Sun 7 Jun 2020
+Lots of new cool features added, will update documentation in next few days.
