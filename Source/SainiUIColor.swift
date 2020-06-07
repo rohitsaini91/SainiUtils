@@ -12,7 +12,7 @@ import UIKit
 //MARK:- UICOLOR
 extension UIColor {
     //generate random color
-    static func random() -> UIColor {
+    public static func random() -> UIColor {
         return UIColor(red:   .random(),
                        green: .random(),
                        blue:  .random(),

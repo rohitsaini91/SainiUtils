@@ -190,7 +190,18 @@ open class DiscardableImageCacheItem: NSObject, NSDiscardableContent {
 //MARK:- Saini Custom Tap Gesture
 open class SainiTapGestureRecognizer: UITapGestureRecognizer {
 var action : (()->Void)? = nil
+}
 
+public enum Swipe:String{
+    case left
+    case right
+    case up
+    case down
+}
+
+//MARK:- Saini Custom Tap Gesture
+open class SainiSwipeGestureRecognizer: UISwipeGestureRecognizer {
+    var disha : ((_ type:Swipe)->Void)? = nil
 }
 
 //MARK:- CUSTOM BUTTON
@@ -365,7 +376,7 @@ open class sainiCardView: UIView {
 //============================================================
 //MARK:- AudioService(play Sound)
 open class SainiAudioService {
-    func sainiPlayLocalSound(soundName: String,type:String)  {
+    public func sainiPlayLocalSound(soundName: String,type:String)  {
     var soundID: SystemSoundID = 0
     let soundURL = NSURL(fileURLWithPath: Bundle.main.path(forResource: soundName, ofType: type)!)
     AudioServicesCreateSystemSoundID(soundURL, &soundID)
@@ -489,6 +500,153 @@ open class SainiShadowButton: UIButton {
             shadowLayer.shadowRadius = shadowRadius
             
             layer.insertSublayer(shadowLayer, at: 0)
+        }
+    }
+    
+    open class sainiCircleView: UIView {
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            
+            clipsToBounds = true
+        }
+        
+        required public init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+            
+            clipsToBounds = true
+        }
+        
+        override open func layoutSubviews() {
+            super.layoutSubviews()
+            
+            assert(bounds.height == bounds.width, "The aspect ratio isn't 1/1. You can never round this  view!")
+            
+            layer.cornerRadius = bounds.height / 2
+        }
+    }
+    
+    open class sainiCircleImageView: UIImageView {
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            
+            clipsToBounds = true
+        }
+        
+        required public init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+            
+            clipsToBounds = true
+        }
+        
+        override open func layoutSubviews() {
+            super.layoutSubviews()
+            
+            assert(bounds.height == bounds.width, "The aspect ratio isn't 1/1. You can never round this image view!")
+            
+            layer.cornerRadius = bounds.height / 2
+        }
+    }
+    
+    open class sainiCircleButton: UIButton {
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            
+            clipsToBounds = true
+        }
+        
+        required public init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+            
+            clipsToBounds = true
+        }
+        
+        override open func layoutSubviews() {
+            super.layoutSubviews()
+            
+            assert(bounds.height == bounds.width, "The aspect ratio isn't 1/1. You can never round this button view!")
+            
+            layer.cornerRadius = bounds.height / 2
+        }
+    }
+    
+    public func sainiAttributedTextColor(string: String, color: UIColor) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: string, attributes:
+         [NSAttributedString.Key.foregroundColor : color])
+    }
+    
+    public func sainiAttributedStrikeThrough(string: String,style: Int = 2) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: string, attributes:
+         [NSAttributedString.Key.strikethroughStyle : style])
+    }
+    
+    public func sainiAttributedShadowText(string: String,shadowColor: UIColor = .gray) -> NSMutableAttributedString {
+        
+        let shadow = NSShadow()
+        shadow.shadowBlurRadius = 3
+        shadow.shadowOffset = CGSize(width: 3, height: 3)
+        shadow.shadowColor = shadowColor
+        
+        return NSMutableAttributedString(string: string, attributes:
+         [NSAttributedString.Key.shadow : shadow ])
+    }
+    
+    public func sainiAttributedStrokeWidth(string: String,strokeWidth:Int = 2) -> NSMutableAttributedString{
+     return NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.strokeWidth:strokeWidth])
+    }
+    
+    public func sainiAttributedBackgroundColor(string: String,color:UIColor = .lightGray)-> NSMutableAttributedString {
+        return NSMutableAttributedString(string: string, attributes:
+         [NSAttributedString.Key.backgroundColor : color])
+    }
+    
+    public func underline(string: String,fontName:String,fontSize:CGFloat = 10,underlineColor:UIColor = .gray) -> NSMutableAttributedString{
+        return NSMutableAttributedString(string: string, attributes:
+         [NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue ,NSAttributedString.Key.font: UIFont(name: fontName, size: fontSize)!,NSAttributedString.Key.foregroundColor: underlineColor])
+    }
+    
+    //MARK:- sainiDisablePasteForTextField
+    open class sainiDisablePasteForTextField: UITextField {
+
+        /*
+        // Only override draw() if you perform custom drawing.
+        // An empty implementation adversely affects performance during animation.
+        override func draw(_ rect: CGRect) {
+            // Drawing code
+        }
+        */
+        
+        public override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+            if action == #selector(UIResponderStandardEditActions.paste(_:)) {
+                return false
+            }
+            return super.canPerformAction(action, withSender: sender)
+        }
+
+    }
+    
+    //MARK:- Share App Activity
+    public struct ShareAppActivity {
+        public func share(title: String,message: String){
+            let objectsToShare = [title,message] as [Any]
+            let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityController.setValue(title, forKey: "Subject")
+            if let visibleViewController = visibleViewController(){
+                activityController.popoverPresentationController?.sourceView = visibleViewController.view
+                visibleViewController.present(activityController, animated: true, completion: nil)
+            }
+        }
+        
+        public func share(title: String,message: String,picture:UIImage){
+            let objectsToShare = [title,message,picture] as [Any]
+            let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityController.setValue(title, forKey: "Subject")
+            if let visibleViewController = visibleViewController(){
+                activityController.popoverPresentationController?.sourceView = visibleViewController.view
+                visibleViewController.present(activityController, animated: true, completion: nil)
+            }
         }
     }
     

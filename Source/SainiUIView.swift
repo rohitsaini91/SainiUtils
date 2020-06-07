@@ -207,7 +207,7 @@ extension UIView{
                 rect = CGRect(x: 0, y: self.height - thicknessOfBorder, width: self.width, height: thicknessOfBorder) //CGRectMake(0, self.height - thicknessOfBorder, self.width, thicknessOfBorder);
             case .Right:
                 rect = CGRect(x: self.width-thicknessOfBorder, y: 0, width: thicknessOfBorder, height: self.height) //CGRectMake(self.width-thicknessOfBorder, 0,thicknessOfBorder, self.height);
-            
+                
             }
             
             let layerBorder = CALayer()
@@ -324,7 +324,7 @@ extension UIView{
     
     
     //MARK:- sainiDashedLine
-   public func sainiDashedLine(color: CGColor,lineDashPattern: [NSNumber]) {
+    public func sainiDashedLine(color: CGColor,lineDashPattern: [NSNumber]) {
         let path = CGMutablePath()
         let shapeLayer = CAShapeLayer()
         shapeLayer.lineWidth = self.frame.height
@@ -337,7 +337,7 @@ extension UIView{
     }
     
     //MARK:- sainiAddGestureToUIView
-   public func sainiAddTapGesture(action : @escaping ()->Void ){
+    public func sainiAddTapGesture(action : @escaping ()->Void ){
         let tap = SainiTapGestureRecognizer(target: self , action: #selector(self.handleTap(_:)))
         tap.action = action
         tap.numberOfTapsRequired = 1
@@ -348,6 +348,38 @@ extension UIView{
     }
     @objc public func handleTap(_ sender: SainiTapGestureRecognizer) {
         sender.action!()
+    }
+    
+    //MARK:- sainiAddSwipe to UIView
+    public func sainiAddSwipe(action : @escaping (Swipe)->Void) {
+        let directions: [UISwipeGestureRecognizer.Direction] = [.right, .left, .up, .down]
+        for direction in directions {
+            let swipe = SainiSwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+            swipe.direction = direction
+            swipe.disha = action
+            self.addGestureRecognizer(swipe)
+            self.isUserInteractionEnabled = true
+        }
+    }
+    
+    @objc public func handleSwipe(sender: SainiSwipeGestureRecognizer) {
+        switch sender.direction {
+        case .down:
+            sender.disha!(.down)
+            break
+        case .up:
+            sender.disha!(.up)
+            break
+        case .left:
+            sender.disha!(.left)
+            break
+        case .right:
+            sender.disha!(.right)
+            break
+        default:
+            break
+        }
+        
     }
     
     //MARK:- sainiPulsateAnimation
@@ -365,13 +397,13 @@ extension UIView{
     }
     
     //MARK:- sainiFlashAnimation
-   public func sainiFlash() {
+    public func sainiFlash() {
         
         let flash = CABasicAnimation(keyPath: "opacity")
         flash.duration = 0.3
         flash.fromValue = 1
         flash.toValue = 0.1
-    
+        
         flash.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         flash.autoreverses = true
         flash.repeatCount = 1

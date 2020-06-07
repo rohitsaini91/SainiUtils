@@ -133,4 +133,11 @@ extension Date{
         
         return dateFormatter.string(from: self)
     }
+    
+    //MARK: - sainiStampValue
+    public func sainiStampValue() -> String
+    {
+        return String(format: "%0.0f", self.timeIntervalSince1970*1000)
+    }
+
 }
