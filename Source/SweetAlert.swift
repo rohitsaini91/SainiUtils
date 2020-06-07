@@ -67,7 +67,7 @@ open class SweetAlert: UIViewController {
         titleLabel.text = ""
         titleLabel.numberOfLines = 1
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: kFont, size:16)
+        titleLabel.font = UIFont(name: kFont, size:25)
         titleLabel.textColor = UIColor.colorFromRGB(0x575757)
         titleLabel.backgroundColor = .white
     }
@@ -120,7 +120,7 @@ open class SweetAlert: UIViewController {
         var buttonRect:[CGRect] = []
         for button in buttons {
             let string = button.title(for: UIControl.State())! as NSString
-            buttonRect.append(string.boundingRect(with: CGSize(width: width, height:0.0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:[NSAttributedString.Key.font:button.titleLabel!.font], context:nil))
+            buttonRect.append(string.boundingRect(with: CGSize(width: width, height:0.0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:[NSAttributedString.Key.font:button.titleLabel!.font ?? kFont], context:nil))
         }
         
         var totalWidth: CGFloat = 0.0
