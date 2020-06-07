@@ -22,7 +22,7 @@ open class SainiLocationManager: NSObject {
         return self.locationManager.location
     }
     
-    override init() {
+    public override init() {
         super.init()
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
